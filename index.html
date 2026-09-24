@@ -9,13 +9,13 @@
 <style>
 
 :root{
-    --gold:#ffd66b;
-    --gold2:#ffb52f;
-    --cream:#fff8e8;
-    --orange:#ff9b55;
-    --blue1:#06131d;
-    --blue2:#0b2633;
-    --blue3:#123d4b;
+    --gold:#7a2345;
+    --gold2:#9b3d61;
+    --cream:#351622;
+    --orange:#76243f;
+    --blue1:#e8adc2;
+    --blue2:#f3c4d2;
+    --blue3:#efb8ca;
 }
 
 *{
@@ -41,23 +41,24 @@ body{
 
     color:var(--cream);
     font-family:Georgia,"Times New Roman",serif;
+    text-shadow:0 1px 2px rgba(255,255,255,.35);
 
     background:
         radial-gradient(
-            circle at 15% 15%,
-            rgba(255,210,90,.15),
-            transparent 28%
+            circle at 20% 20%,
+            rgba(255,255,255,.35),
+            transparent 35%
         ),
         radial-gradient(
-            circle at 85% 80%,
-            rgba(255,150,60,.12),
-            transparent 30%
+            circle at 80% 75%,
+            rgba(255,255,255,.25),
+            transparent 35%
         ),
         linear-gradient(
             135deg,
-            var(--blue1),
-            var(--blue2) 48%,
-            var(--blue3)
+            #e8adc2,
+            #f3c4d2 50%,
+            #efb8ca
         );
 }
 
@@ -161,7 +162,7 @@ body{
     max-width:440px;
     margin:0 auto 28px;
 
-    color:#c9c6cf;
+    color:#63384a;
 
     font-family:Arial,sans-serif;
     font-size:clamp(.88rem,2vw,1rem);
@@ -186,7 +187,7 @@ body{
 
     background:rgba(255,255,255,.06);
 
-    color:white;
+    color:#351622;
 
     text-align:center;
 
@@ -203,7 +204,7 @@ body{
 }
 
 #nameInput::placeholder{
-    color:#aaa6b1;
+    color:#765366;
 }
 
 .upload{
@@ -212,7 +213,7 @@ body{
     border:1px dashed rgba(255,255,255,.3);
     border-radius:30px;
 
-    color:#c9c5cf;
+    color:#63384a;
 
     font-family:Arial,sans-serif;
     font-size:.88rem;
@@ -265,7 +266,7 @@ body{
             #ffc44f
         );
 
-    color:#10202a;
+    color:#ffffff;
 
     font-family:Arial,sans-serif;
     font-size:1rem;
@@ -465,7 +466,7 @@ body{
 .spark{
     position:absolute;
 
-    color:#fff5d4;
+    color:#fff7fb;
 
     font-size:1.5rem;
 
@@ -576,6 +577,8 @@ body{
 
     text-align:center;
 
+    text-shadow:0 1px 1px rgba(255,255,255,.45);
+
     overflow-wrap:normal;
     word-break:normal;
 }
@@ -665,7 +668,9 @@ body{
         1rem
     );
 
-    font-weight:600;
+    font-weight:700;
+
+    text-shadow:0 1px 2px rgba(255,255,255,.4);
 
     line-height:1.5;
 }
@@ -683,7 +688,7 @@ body{
 
     background:transparent;
 
-    color:#c9c5cf;
+    color:#63384a;
 
     cursor:pointer;
 
