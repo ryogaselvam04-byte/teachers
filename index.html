@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Teacher's Day</title>
+
+<style>
+
+:root{
+    --gold:#ffd66b;
+    --gold2:#ffb52f;
+    --cream:#fff8e8;
+    --orange:#ff9b55;
+    --blue1:#06131d;
+    --blue2:#0b2633;
+    --blue3:#123d4b;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+
+    overflow-x:hidden;
+
+    color:var(--cream);
+    font-family:Georgia,"Times New Roman",serif;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(255,210,90,.15),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(255,150,60,.12),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            var(--blue1),
+            var(--blue2) 48%,
+            var(--blue3)
+        );
+}
+
+
+/* =========================
+   ENDLESS BACKGROUND
+========================= */
+
+#particles{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:0;
+}
+
+.particle{
+    position:absolute;
+    bottom:-40px;
+
+    color:var(--gold);
+
+    opacity:0;
+
+    text-shadow:
+        0 0 6px rgba(255,214,107,.95),
+        0 0 14px rgba(255,175,45,.75),
+        0 0 25px rgba(255,175,45,.4);
+
+    animation:particleUp linear forwards;
+}
+
+@keyframes particleUp{
+
+    0%{
+        opacity:0;
+        transform:
+            translate3d(0,0,0)
+            rotate(0deg)
+            scale(.6);
+    }
+
+    10%{
+        opacity:.9;
+    }
+
+    50%{
+        opacity:.65;
+    }
+
+    85%{
+        opacity:.35;
+    }
+
+    100%{
+        opacity:0;
+        transform:
+            translate3d(var(--x),-115vh,0)
+            rotate(var(--r))
+            scale(1.2);
+    }
+}
+
+
+/* =========================
+   MAIN SCREEN
+========================= */
+
+.screen{
+    position:relative;
+    z-index:5;
+
+    width:100%;
+    max-width:1100px;
+
+    margin:auto;
+
+    text-align:center;
+}
+
+
+/* =========================
+   ENTRY SCREEN
+========================= */
+
+#entry{
+    max-width:650px;
+}
+
+#entry .icon{
+    font-size:clamp(2.3rem,5vw,3.2rem);
+    margin-bottom:14px;
+}
+
+#entry h1{
+    font-size:clamp(2rem,5vw,3.2rem);
+    margin-bottom:12px;
+}
+
+#entry p{
+    max-width:440px;
+    margin:0 auto 28px;
+
+    color:#c9c6cf;
+
+    font-family:Arial,sans-serif;
+    font-size:clamp(.88rem,2vw,1rem);
+
+    line-height:1.6;
+}
+
+#nameForm{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+}
+
+#nameInput{
+    width:min(100%,340px);
+
+    padding:14px 18px;
+
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:14px;
+
+    background:rgba(255,255,255,.06);
+
+    color:white;
+
+    text-align:center;
+
+    font-size:1rem;
+
+    outline:none;
+}
+
+#nameInput:focus{
+    border-color:var(--gold);
+
+    box-shadow:
+        0 0 18px rgba(255,205,80,.18);
+}
+
+#nameInput::placeholder{
+    color:#aaa6b1;
+}
+
+.upload{
+    padding:11px 22px;
+
+    border:1px dashed rgba(255,255,255,.3);
+    border-radius:30px;
+
+    color:#c9c5cf;
+
+    font-family:Arial,sans-serif;
+    font-size:.88rem;
+
+    cursor:pointer;
+}
+
+.upload:hover{
+    color:var(--gold);
+    border-color:var(--gold);
+}
+
+.upload input{
+    display:none;
+}
+
+#previewWrap{
+    display:none;
+}
+
+#previewWrap.show{
+    display:block;
+}
+
+#preview{
+    width:62px;
+    height:62px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    border:2px solid var(--gold);
+
+    box-shadow:
+        0 0 8px rgba(255,205,80,.9),
+        0 0 18px rgba(255,155,50,.5);
+}
+
+#enterBtn{
+    padding:13px 42px;
+
+    border:0;
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffe18b,
+            #ffc44f
+        );
+
+    color:#10202a;
+
+    font-family:Arial,sans-serif;
+    font-size:1rem;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+#enterBtn:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 8px 30px rgba(255,190,60,.35);
+}
+
+
+/* =========================
+   WISH SCREEN
+========================= */
+
+#wish{
+    display:none;
+}
+
+#wish.active{
+    display:block;
+}
+
+
+/* =========================
+   PHOTO COLLAGE
+========================= */
+
+.collage{
+    position:relative;
+
+    width:100%;
+    max-width:760px;
+
+    height:min(500px,48vh);
+
+    min-height:330px;
+
+    margin:0 auto 10px;
+}
+
+.original{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:min(300px,30vw);
+    max-height:90%;
+
+    transform:translate(-50%,-50%);
+
+    object-fit:contain;
+
+    z-index:10;
+
+    border-radius:18px;
+
+    filter:
+        drop-shadow(0 0 2px white)
+        drop-shadow(0 0 7px rgba(255,214,107,1))
+        drop-shadow(0 0 18px rgba(255,169,48,.9))
+        drop-shadow(0 0 35px rgba(255,169,48,.45));
+
+    animation:
+        originalFloat 5s ease-in-out infinite,
+        originalGlow 3s ease-in-out infinite;
+}
+
+@keyframes originalFloat{
+
+    0%,100%{
+        transform:
+            translate(-50%,-50%)
+            translateY(0);
+    }
+
+    50%{
+        transform:
+            translate(-50%,-50%)
+            translateY(-7px);
+    }
+}
+
+@keyframes originalGlow{
+
+    0%,100%{
+        filter:
+            drop-shadow(0 0 2px white)
+            drop-shadow(0 0 6px rgba(255,214,107,.9))
+            drop-shadow(0 0 16px rgba(255,169,48,.75))
+            drop-shadow(0 0 28px rgba(255,169,48,.35));
+    }
+
+    50%{
+        filter:
+            drop-shadow(0 0 3px white)
+            drop-shadow(0 0 10px rgba(255,224,120,1))
+            drop-shadow(0 0 23px rgba(255,165,45,1))
+            drop-shadow(0 0 40px rgba(255,169,48,.55));
+    }
+}
+
+
+/* =========================
+   SMALL ANIMATED PHOTOS
+========================= */
+
+.cartoon{
+    position:absolute;
+
+    width:130px;
+    height:155px;
+
+    object-fit:contain;
+
+    z-index:6;
+
+    opacity:0;
+
+    border-radius:18px;
+
+    filter:
+        drop-shadow(0 0 3px rgba(255,240,190,.95))
+        drop-shadow(0 0 8px rgba(255,203,88,1))
+        drop-shadow(0 0 18px rgba(255,145,40,.8));
+
+    animation:
+        cartoonAppear .8s ease forwards,
+        cartoonFloat 5s ease-in-out infinite;
+}
+
+.c1{
+    left:5%;
+    top:5px;
+    transform:rotate(-9deg);
+    animation-delay:.2s,1.2s;
+}
+
+.c2{
+    right:5%;
+    top:5px;
+    transform:rotate(9deg);
+    animation-delay:.45s,1.8s;
+}
+
+.c3{
+    left:5%;
+    bottom:0;
+    transform:rotate(8deg);
+    animation-delay:.7s,2.4s;
+}
+
+.c4{
+    right:5%;
+    bottom:0;
+    transform:rotate(-8deg);
+    animation-delay:.95s,3s;
+}
+
+@keyframes cartoonAppear{
+
+    0%{
+        opacity:0;
+        scale:.45;
+    }
+
+    100%{
+        opacity:.92;
+        scale:1;
+    }
+}
+
+@keyframes cartoonFloat{
+
+    0%,100%{
+        margin-top:0;
+    }
+
+    50%{
+        margin-top:-12px;
+    }
+}
+
+
+/* =========================
+   SPARKLES
+========================= */
+
+.spark{
+    position:absolute;
+
+    color:#fff5d4;
+
+    font-size:1.5rem;
+
+    z-index:4;
+
+    text-shadow:
+        0 0 6px var(--gold),
+        0 0 15px rgba(255,180,45,.8);
+
+    animation:spark 2.2s ease-in-out infinite;
+}
+
+.sp1{
+    top:12%;
+    left:32%;
+}
+
+.sp2{
+    top:4%;
+    left:50%;
+    animation-delay:.5s;
+}
+
+.sp3{
+    top:20%;
+    right:31%;
+    animation-delay:1s;
+}
+
+.sp4{
+    bottom:15%;
+    left:31%;
+    animation-delay:1.4s;
+}
+
+.sp5{
+    bottom:10%;
+    right:31%;
+    animation-delay:.8s;
+}
+
+@keyframes spark{
+
+    0%,100%{
+        opacity:.25;
+        transform:scale(.7) rotate(0);
+    }
+
+    50%{
+        opacity:1;
+        transform:scale(1.25) rotate(20deg);
+    }
+}
+
+
+/* =========================
+   TEXT AREA
+========================= */
+
+.textArea{
+    width:min(92vw,900px);
+
+    margin:0 auto;
+}
+
+
+/* NAME */
+
+.who{
+    min-height:48px;
+
+    margin:5px auto 18px;
+
+    color:var(--gold);
+
+    font-size:clamp(
+        1.6rem,
+        3.5vw,
+        2.6rem
+    );
+
+    font-weight:600;
+
+    line-height:1.25;
+
+    white-space:normal;
+}
+
+
+/* MESSAGE */
+
+.message{
+    width:100%;
+
+    min-height:0;
+
+    margin:0 auto 18px;
+
+    color:var(--cream);
+
+    font-size:clamp(
+        1rem,
+        2.15vw,
+        1.35rem
+    );
+
+    line-height:1.6;
+
+    text-align:center;
+
+    overflow-wrap:normal;
+    word-break:normal;
+}
+
+
+/*
+    IMPORTANT:
+
+    Each WORD is an inline-block.
+    So letters can animate individually,
+    but a word will NEVER break in half.
+*/
+
+.word{
+    display:inline-block;
+
+    white-space:nowrap;
+
+    margin-right:.27em;
+}
+
+.letter{
+    display:inline-block;
+
+    opacity:0;
+
+    transform:
+        translateY(9px);
+
+    filter:blur(3px);
+
+    transition:
+        opacity .12s ease,
+        transform .12s ease,
+        filter .12s ease;
+}
+
+.letter.show{
+    opacity:1;
+
+    transform:
+        translateY(0);
+
+    filter:blur(0);
+}
+
+
+/* DIVIDER */
+
+.divider{
+    width:58px;
+    height:3px;
+
+    margin:22px auto;
+
+    border-radius:10px;
+
+    background:var(--gold);
+
+    box-shadow:
+        0 0 8px rgba(255,210,90,.8);
+
+    transform:scaleX(0);
+
+    transition:transform .7s ease;
+}
+
+.divider.show{
+    transform:scaleX(1);
+}
+
+
+/* SIGNATURE */
+
+.signature{
+    min-height:35px;
+
+    margin-top:18px;
+
+    color:var(--orange);
+
+    font-family:Arial,sans-serif;
+
+    font-size:clamp(
+        .86rem,
+        1.8vw,
+        1rem
+    );
+
+    font-weight:600;
+
+    line-height:1.5;
+}
+
+
+/* AGAIN */
+
+#again{
+    margin-top:26px;
+
+    padding:11px 28px;
+
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:30px;
+
+    background:transparent;
+
+    color:#c9c5cf;
+
+    cursor:pointer;
+
+    opacity:0;
+
+    transition:.5s;
+}
+
+#again.show{
+    opacity:1;
+}
+
+#again:hover{
+    color:var(--gold);
+    border-color:var(--gold);
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (min-width:601px) and (max-width:1024px){
+
+    body{
+        padding:25px;
+    }
+
+    .collage{
+        max-width:650px;
+        height:430px;
+    }
+
+    .original{
+        width:min(270px,32vw);
+    }
+
+    .cartoon{
+        width:115px;
+        height:140px;
+    }
+
+    .textArea{
+        width:min(88vw,760px);
+    }
+
+    .message{
+        font-size:clamp(
+            1.05rem,
+            2.2vw,
+            1.25rem
+        );
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width:600px){
+
+    body{
+        padding:12px;
+        align-items:flex-start;
+    }
+
+    .screen{
+        margin-top:15px;
+    }
+
+    .collage{
+        height:350px;
+        min-height:350px;
+
+        margin-bottom:2px;
+    }
+
+    .original{
+        width:min(205px,50vw);
+        max-height:300px;
+    }
+
+    .cartoon{
+        width:78px;
+        height:100px;
+    }
+
+    .c1{
+        left:1%;
+    }
+
+    .c2{
+        right:1%;
+    }
+
+    .c3{
+        left:1%;
+    }
+
+    .c4{
+        right:1%;
+    }
+
+    .spark{
+        font-size:1.05rem;
+    }
+
+    .textArea{
+        width:94vw;
+    }
+
+    .who{
+        font-size:clamp(
+            1.5rem,
+            7vw,
+            2rem
+        );
+
+        margin-bottom:15px;
+    }
+
+    .message{
+        width:94vw;
+
+        font-size:clamp(
+            .98rem,
+            4.3vw,
+            1.12rem
+        );
+
+        line-height:1.55;
+
+        margin-bottom:15px;
+    }
+
+    .word{
+        margin-right:.22em;
+    }
+
+    .signature{
+        font-size:.88rem;
+    }
+}
+
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media (max-width:390px){
+
+    body{
+        padding:8px;
+    }
+
+    .screen{
+        margin-top:5px;
+    }
+
+    .collage{
+        height:300px;
+        min-height:300px;
+    }
+
+    .original{
+        width:165px;
+        max-height:260px;
+    }
+
+    .cartoon{
+        width:63px;
+        height:82px;
+    }
+
+    .spark{
+        font-size:.9rem;
+    }
+
+    .textArea{
+        width:96vw;
+    }
+
+    .message{
+        width:96vw;
+
+        font-size:.96rem;
+
+        line-height:1.5;
+    }
+
+    .who{
+        font-size:1.45rem;
+    }
+}
+
+
+/* =========================
+   LARGE DESKTOP
+========================= */
+
+@media (min-width:1025px){
+
+    .collage{
+        max-width:800px;
+        height:480px;
+    }
+
+    .original{
+        width:300px;
+    }
+
+    .cartoon{
+        width:135px;
+        height:165px;
+    }
+
+    .textArea{
+        max-width:900px;
+    }
+
+    .message{
+        max-width:820px;
+    }
+}
+
+
+/* =========================
+   VERY LARGE / TV
+========================= */
+
+@media (min-width:1600px){
+
+    body{
+        padding:40px;
+    }
+
+    .screen{
+        max-width:1250px;
+    }
+
+    .collage{
+        max-width:950px;
+        height:540px;
+    }
+
+    .original{
+        width:350px;
+        max-height:500px;
+    }
+
+    .cartoon{
+        width:160px;
+        height:190px;
+    }
+
+    .textArea{
+        max-width:1050px;
+    }
+
+    .message{
+        max-width:950px;
+
+        font-size:1.45rem;
+
+        line-height:1.65;
+    }
+
+    .who{
+        font-size:2.8rem;
+    }
+
+    .signature{
+        font-size:1.1rem;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<div id="particles"></div>
+
+
+<!-- =========================
+     ENTRY SCREEN
+========================= -->
+
+<div class="screen" id="entry">
+
+    <div class="icon">🌿</div>
+
+    <h1>Happy Teacher's Day</h1>
+
+    <p>
+        Type your name, add your photo if you'd like,
+        and receive a message from your students.
+    </p>
+
+    <form id="nameForm">
+
+        <input
+            id="nameInput"
+            type="text"
+            maxlength="40"
+            autocomplete="off"
+            placeholder="Your name"
+            required
+        >
+
+        <label class="upload">
+
+            📷 Add your photo (optional)
+
+            <input
+                id="photoInput"
+                type="file"
+                accept="image/*"
+            >
+
+        </label>
+
+        <div id="previewWrap">
+
+            <img
+                id="preview"
+                alt=""
+            >
+
+        </div>
+
+        <button
+            id="enterBtn"
+            type="submit"
+        >
+            Enter
+        </button>
+
+    </form>
+
+</div>
+
+
+<!-- =========================
+     WISH SCREEN
+========================= -->
+
+<div class="screen" id="wish">
+
+    <div class="collage">
+
+        <span class="spark sp1">✦</span>
+        <span class="spark sp2">☆</span>
+        <span class="spark sp3">✦</span>
+        <span class="spark sp4">✧</span>
+        <span class="spark sp5">☆</span>
+
+
+        <!-- SAME UPLOADED PHOTO -->
+
+        <img
+            class="cartoon c1"
+            id="cartoon1"
+            alt=""
+        >
+
+        <img
+            class="cartoon c2"
+            id="cartoon2"
+            alt=""
+        >
+
+        <img
+            class="cartoon c3"
+            id="cartoon3"
+            alt=""
+        >
+
+        <img
+            class="cartoon c4"
+            id="cartoon4"
+            alt=""
+        >
+
+
+        <!-- ORIGINAL PHOTO -->
+
+        <img
+            class="original"
+            id="originalPhoto"
+            alt="Uploaded teacher photo"
+        >
+
+    </div>
+
+
+    <div class="textArea">
+
+        <div
+            class="who"
+            id="who"
+        ></div>
+
+
+        <div
+            class="message"
+            id="m0"
+        ></div>
+
+
+        <div
+            class="message"
+            id="m1"
+        ></div>
+
+
+        <div
+            class="message"
+            id="m2"
+        ></div>
+
+
+        <div
+            class="message"
+            id="m3"
+        ></div>
+
+
+        <div
+            class="message"
+            id="m4"
+        ></div>
+
+
+        <div
+            class="divider"
+            id="divider"
+        ></div>
+
+
+        <div
+            class="signature"
+            id="signature"
+        ></div>
+
+
+        <button
+            id="again"
+        >
+            Send another wish
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const entry =
+    document.getElementById("entry");
+
+const wish =
+    document.getElementById("wish");
+
+const form =
+    document.getElementById("nameForm");
+
+const nameInput =
+    document.getElementById("nameInput");
+
+const photoInput =
+    document.getElementById("photoInput");
+
+const preview =
+    document.getElementById("preview");
+
+const previewWrap =
+    document.getElementById("previewWrap");
+
+const originalPhoto =
+    document.getElementById("originalPhoto");
+
+const cartoon1 =
+    document.getElementById("cartoon1");
+
+const cartoon2 =
+    document.getElementById("cartoon2");
+
+const cartoon3 =
+    document.getElementById("cartoon3");
+
+const cartoon4 =
+    document.getElementById("cartoon4");
+
+const who =
+    document.getElementById("who");
+
+const divider =
+    document.getElementById("divider");
+
+const signature =
+    document.getElementById("signature");
+
+const again =
+    document.getElementById("again");
+
+const particles =
+    document.getElementById("particles");
+
+
+let uploadedPhoto = null;
+
+let backgroundStarted = false;
+
+
+/* =========================
+   PHOTO UPLOAD
+========================= */
+
+photoInput.addEventListener(
+    "change",
+    function(){
+
+        const file =
+            this.files[0];
+
+        if(!file){
+
+            uploadedPhoto = null;
+
+            previewWrap.classList.remove(
+                "show"
+            );
+
+            return;
+        }
+
+
+        if(!file.type.startsWith("image/")){
+
+            uploadedPhoto = null;
+
+            previewWrap.classList.remove(
+                "show"
+            );
+
+            return;
+        }
+
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            function(e){
+
+                uploadedPhoto =
+                    e.target.result;
+
+
+                preview.src =
+                    uploadedPhoto;
+
+
+                previewWrap.classList.add(
+                    "show"
+                );
+
+            };
+
+
+        reader.readAsDataURL(file);
+
+    }
+);
+
+
+/* =========================
+   LETTER BY LETTER
+   WITHOUT BREAKING WORDS
+========================= */
+
+function typeText(
+    element,
+    text,
+    speed,
+    done
+){
+
+    element.innerHTML = "";
+
+
+    /*
+        Split into words.
+
+        Each word stays together,
+        while every letter inside
+        that word appears separately.
+    */
+
+    const words =
+        text.split(" ");
+
+
+    let wordIndex = 0;
+
+    let letterIndex = 0;
+
+
+    function nextLetter(){
+
+        if(
+            wordIndex >= words.length
+        ){
+
+            if(done){
+                done();
+            }
+
+            return;
+        }
+
+
+        const word =
+            words[wordIndex];
+
+
+        /*
+            Create one complete word
+            as an inline-block.
+        */
+
+        let wordElement =
+            element.querySelector(
+                '.word[data-word="' +
+                wordIndex +
+                '"]'
+            );
+
+
+        if(!wordElement){
+
+            wordElement =
+                document.createElement(
+                    "span"
+                );
+
+            wordElement.className =
+                "word";
+
+            wordElement.dataset.word =
+                wordIndex;
+
+            element.appendChild(
+                wordElement
+            );
+
+        }
+
+
+        if(
+            letterIndex >= word.length
+        ){
+
+            /*
+                Move to next word.
+            */
+
+            wordIndex++;
+
+            letterIndex = 0;
+
+            /*
+                Add natural space
+                between words.
+            */
+
+            if(
+                wordIndex < words.length
+            ){
+
+                element.appendChild(
+                    document.createTextNode(
+                        " "
+                    )
+                );
+
+            }
+
+            setTimeout(
+                nextLetter,
+                speed
+            );
+
+            return;
+        }
+
+
+        const letter =
+            document.createElement(
+                "span"
+            );
+
+
+        letter.className =
+            "letter";
+
+
+        letter.textContent =
+            word[letterIndex];
+
+
+        wordElement.appendChild(
+            letter
+        );
+
+
+        requestAnimationFrame(
+            function(){
+
+                letter.classList.add(
+                    "show"
+                );
+
+            }
+        );
+
+
+        letterIndex++;
+
+
+        setTimeout(
+            nextLetter,
+            speed
+        );
+
+    }
+
+
+    nextLetter();
+
+}
+
+
+/* =========================
+   ENDLESS BACKGROUND
+========================= */
+
+function makeParticle(){
+
+    const symbols = [
+        "✦",
+        "✧",
+        "☆",
+        "♥",
+        "❀",
+        "✿"
+    ];
+
+
+    const particle =
+        document.createElement(
+            "span"
+        );
+
+
+    particle.className =
+        "particle";
+
+
+    particle.textContent =
+        symbols[
+            Math.floor(
+                Math.random() *
+                symbols.length
+            )
+        ];
+
+
+    particle.style.left =
+        Math.random() * 100 + "%";
+
+
+    particle.style.fontSize =
+        (
+            .6 +
+            Math.random() * .9
+        ) + "rem";
+
+
+    particle.style.setProperty(
+        "--x",
+        (
+            Math.random() * 120 -
+            60
+        ) + "px"
+    );
+
+
+    particle.style.setProperty(
+        "--r",
+        (
+            Math.random() * 360 -
+            180
+        ) + "deg"
+    );
+
+
+    const duration =
+        6 +
+        Math.random() * 7;
+
+
+    particle.style.animationDuration =
+        duration + "s";
+
+
+    particles.appendChild(
+        particle
+    );
+
+
+    setTimeout(
+        function(){
+
+            particle.remove();
+
+        },
+        (duration + 1) * 1000
+    );
+
+}
+
+
+function startBackground(){
+
+    if(backgroundStarted){
+        return;
+    }
+
+
+    backgroundStarted = true;
+
+
+    for(
+        let i = 0;
+        i < 18;
+        i++
+    ){
+
+        setTimeout(
+            makeParticle,
+            i * 200
+        );
+
+    }
+
+
+    setInterval(
+        makeParticle,
+        420
+    );
+
+}
+
+
+/* =========================
+   SHOW WISH
+========================= */
+
+function showWish(name){
+
+    entry.style.display =
+        "none";
+
+
+    wish.classList.add(
+        "active"
+    );
+
+
+    /*
+        Original uploaded image
+        stays completely unchanged.
+    */
+
+    if(uploadedPhoto){
+
+        originalPhoto.src =
+            uploadedPhoto;
+
+
+        cartoon1.src =
+            uploadedPhoto;
+
+        cartoon2.src =
+            uploadedPhoto;
+
+        cartoon3.src =
+            uploadedPhoto;
+
+        cartoon4.src =
+            uploadedPhoto;
+
+    }
+
+
+    startBackground();
+
+
+    who.innerHTML = "";
+
+    document.getElementById("m0").innerHTML = "";
+    document.getElementById("m1").innerHTML = "";
+    document.getElementById("m2").innerHTML = "";
+    document.getElementById("m3").innerHTML = "";
+    document.getElementById("m4").innerHTML = "";
+
+    signature.innerHTML = "";
+
+
+    divider.classList.remove(
+        "show"
+    );
+
+    again.classList.remove(
+        "show"
+    );
+
+
+    typeText(
+        who,
+        "Dear " + name + ",",
+        65,
+        startMessages
+    );
+
+
+    function startMessages(){
+
+        const messages = [
+
+            [
+                "m0",
+                "Today, we pause to say what we don't say enough."
+            ],
+
+            [
+                "m1",
+                "Thank you for every lesson taught with patience,"
+            ],
+
+            [
+                "m2",
+                "every doubt cleared without judgement,"
+            ],
+
+            [
+                "m3",
+                "and every time you believed in us before we believed in ourselves."
+            ],
+
+            [
+                "m4",
+                "You didn't just teach us subjects — you shaped who we are."
+            ],
+
+            [
+                "signature",
+                "Happy Teacher's Day ♥ — with love, all your students"
+            ]
+
+        ];
+
+
+        let index = 0;
+
+
+        function next(){
+
+            if(
+                index >= messages.length
+            ){
+
+                setTimeout(
+                    function(){
+
+                        divider.classList.add(
+                            "show"
+                        );
+
+
+                        setTimeout(
+                            function(){
+
+                                again.classList.add(
+                                    "show"
+                                );
+
+                            },
+                            700
+                        );
+
+                    },
+                    300
+                );
+
+                return;
+            }
+
+
+            const item =
+                messages[index];
+
+
+            const element =
+                document.getElementById(
+                    item[0]
+                );
+
+
+            typeText(
+                element,
+                item[1],
+                52,
+                function(){
+
+                    index++;
+
+
+                    setTimeout(
+                        next,
+                        400
+                    );
+
+                }
+            );
+
+        }
+
+
+        next();
+
+    }
+
+}
+
+
+/* =========================
+   ENTER
+========================= */
+
+form.addEventListener(
+    "submit",
+    function(e){
+
+        e.preventDefault();
+
+
+        const name =
+            nameInput.value.trim();
+
+
+        if(!name){
+            return;
+        }
+
+
+        showWish(name);
+
+    }
+);
+
+
+/* =========================
+   AGAIN
+========================= */
+
+again.addEventListener(
+    "click",
+    function(){
+
+        wish.classList.remove(
+            "active"
+        );
+
+
+        entry.style.display =
+            "";
+
+
+        nameInput.value =
+            "";
+
+
+        nameInput.focus();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
